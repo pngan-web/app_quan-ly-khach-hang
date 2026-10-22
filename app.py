@@ -216,8 +216,8 @@ class QuanLyKhachHang:
             return False, "Loại khách hàng không hợp lệ"
         if r["so_du"] < 0:
             return False, "Số dư âm"
-        if not (300 <= r["diem_tin_dung"] <= 850):
-            return False, "Điểm tín dụng phải nằm trong khoảng 300-850"
+        if not (150 <= r["diem_tin_dung"] <= 750):
+            return False, "Điểm tín dụng phải nằm trong khoảng 150-750"
         return True, ""
 
     def _kiem_tra_trung(self, r, bo_qua_ma=None):
@@ -788,11 +788,11 @@ def chay_kiem_thu():
     # ---- nhóm E: điểm tín dụng, is_vip và hàng đợi VIP ----
     def t25():
         ql = QuanLyKhachHang()
-        thap = ql.them(mau(1, diem_tin_dung=299))[1]
-        cao = ql.them(mau(2, diem_tin_dung=851))[1]
+        thap = ql.them(mau(1, diem_tin_dung=149))[1]
+        cao = ql.them(mau(2, diem_tin_dung=751))[1]
         chu = ql.them(mau(3, diem_tin_dung="abc"))[1]
-        bien1, _ = ql.them(mau(4, diem_tin_dung=300))
-        bien2, _ = ql.them(mau(5, diem_tin_dung="850"))
+        bien1, _ = ql.them(mau(4, diem_tin_dung=150))
+        bien2, _ = ql.them(mau(5, diem_tin_dung="50"))
         vip_chuoi, _ = ql.them(mau(6, is_vip="True"))
         sai_vip = ql.them(mau(7, is_vip="abc"))[1]
         dung = (thap == cao == "Điểm tín dụng phải nằm trong khoảng 300-850" and chu == "Thiếu trường 'diem_tin_dung'"
@@ -1076,7 +1076,7 @@ with tab_them:
         lk = a.selectbox("Loại KH", DS_LOAI)
         sd = b.number_input("Số dư (VND)", min_value=0.0, step=100000.0)
         nd = a.date_input("Ngày đăng ký", value=date.today())
-        diem = b.number_input("Điểm tín dụng (300-850)", min_value=0, max_value=1000, value=650, step=10)
+        diem = b.number_input("Điểm tín dụng (150-750)", min_value=150, max_value=750, value=650, step=10)
         dau_vip = a.checkbox("Đánh dấu VIP")
         if st.form_submit_button("Thêm", type="primary"):
             st.session_state.thong_bao = ql.them({
