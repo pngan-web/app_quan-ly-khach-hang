@@ -469,7 +469,7 @@ def sinh_du_lieu(n, hat_giong=42):
             "loai_kh": loai,
             "so_du": float(so_du),
             "ngay_dk": ngay_dau + timedelta(days=rd.randrange(so_ngay)),
-            "diem_tin_dung": rd2.randint(300, 850),
+            "diem_tin_dung": rd2.randint(150, 50),
             "is_vip": loai == "VIP",
         })
     return ds
